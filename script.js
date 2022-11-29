@@ -88,19 +88,39 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+
 // Function to prompt user for password options
 function getPasswordOptions() {
-
-}
-
-// Function for getting a random element from an array
-function getRandom(arr) {
-
-}
-
-// Function to generate password with user input
-function generatePassword() {
-
+  let intCharacterCount = 0;
+  while(intCharacterCount > 64 || intCharacterCount < 10 || isNaN(intCharacterCount)) {
+    let characterCount = prompt('Choose password length between 10 and 64');
+    intCharacterCount = parseInt(characterCount);
+  }
+  let useSpecialCharacters = false
+  let useLowerCase = false
+  let useUpperCase = false
+  let useNumeric = false
+  while(!useSpecialCharacters && !useLowerCase && !useUpperCase && !useNumeric) {
+    alert('Must select at least one character type.');
+    useSpecialCharacters = confirm('Can use special characters?')
+    useLowerCase = confirm('Can use lower case characters?')
+    useUpperCase = confirm('Can use lower case characters?')
+    useNumeric = confirm('Can use numeric characters?')
+  }
+  let selectedCharacterTypes = [];
+  if(useSpecialCharacters) {selectedCharacterTypes.push(specialCharacters)};
+  if(useLowerCase) {selectedCharacterTypes.push(lowerCasedCharacters)};
+  if(useUpperCase) {selectedCharacterTypes.push(upperCasedCharacters)};
+  if(useNumeric) {selectedCharacterTypes.push(numericCharacters)};
+  let passwordString = ''
+  for(let i = 0; i < intCharacterCount + 1; i++) {
+    let randomCharacterType = Math.floor(Math.random() * selectedCharacterTypes.length);
+    let randomCharacterPosition =  Math.floor(Math.random() * selectedCharacterTypes[randomCharacterType].length);
+    let randomCharacter = selectedCharacterTypes[randomCharacterType][randomCharacterPosition];
+    passwordString += randomCharacter
+  }
+  
+  return passwordString;
 }
 
 // Get references to the #generate element
@@ -108,7 +128,7 @@ var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var password = getPasswordOptions();
   var passwordText = document.querySelector('#password');
 
   passwordText.value = password;
