@@ -91,11 +91,13 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
+  //check for password length
   let intCharacterCount = 0;
   while(intCharacterCount > 64 || intCharacterCount < 10 || isNaN(intCharacterCount)) {
     let characterCount = prompt('Choose password length between 10 and 64');
     intCharacterCount = parseInt(characterCount);
   }
+  //ask for character type use
   let useSpecialCharacters = false
   let useLowerCase = false
   let useUpperCase = false
@@ -107,11 +109,13 @@ function getPasswordOptions() {
     useUpperCase = confirm('Can use lower case characters?')
     useNumeric = confirm('Can use numeric characters?')
   }
+  //check for selected character types
   let selectedCharacterTypes = [];
   if(useSpecialCharacters) {selectedCharacterTypes.push(specialCharacters)};
   if(useLowerCase) {selectedCharacterTypes.push(lowerCasedCharacters)};
   if(useUpperCase) {selectedCharacterTypes.push(upperCasedCharacters)};
   if(useNumeric) {selectedCharacterTypes.push(numericCharacters)};
+  //create password string
   let passwordString = ''
   for(let i = 0; i < intCharacterCount + 1; i++) {
     let randomCharacterType = Math.floor(Math.random() * selectedCharacterTypes.length);
