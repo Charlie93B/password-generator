@@ -106,7 +106,7 @@ function getPasswordOptions() {
     alert('Must select at least one character type.');
     useSpecialCharacters = confirm('Can use special characters?')
     useLowerCase = confirm('Can use lower case characters?')
-    useUpperCase = confirm('Can use lower case characters?')
+    useUpperCase = confirm('Can use upper case characters?')
     useNumeric = confirm('Can use numeric characters?')
   }
   //check for selected character types
